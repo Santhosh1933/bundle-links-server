@@ -80,7 +80,7 @@ app.post("/create-route", async (req, res) => {
 app.get("/get-route", async (req, res) => {
   try {
     const { userId, userRouteName } = req.query;
-
+    console.log(req.query)
     let routes;
 
     if (userRouteName) {
