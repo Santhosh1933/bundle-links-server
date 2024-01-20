@@ -45,7 +45,7 @@ app.post("/login", async (req, res) => {
     if (data.length !== 0) {
       return await res.status(200).send({ email, id: data[0]._id });
     } else {
-      return await res.status(400).send({ login: "login failed" });
+      return await res.status(400).send({ message: "login failed" });
     }
   } catch (error) {
     return res.send(error).status(500);
