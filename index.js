@@ -42,6 +42,7 @@ app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const data = await userModel.find({ email: email, password: password });
+    console.log(data)
     if (data.length !== 0) {
       return await res.status(200).send({ email, id: data[0]._id });
     } else {
@@ -80,17 +81,18 @@ app.post("/create-route", async (req, res) => {
 app.get("/get-route", async (req, res) => {
   try {
     const { userId, userRouteName } = req.query;
-    console.log(req.query)
+    console.log(req.query);
     let routes;
-
+    console.log("Before database query");
     if (userRouteName) {
       routes = await routeModel.find({ userRouteName: userRouteName });
     } else {
       routes = await routeModel.find({ userId: userId });
     }
-    if(routes.length==0){
-      return res.status(200).send({message:"No Route Found"});
+    if (routes.length == 0) {
+      return res.status(200).send({ message: "No Route Found" });
     }
+    console.log("After database query");
     return res.status(200).send(routes[0]);
   } catch (error) {
     return res.status(501).send(error);
